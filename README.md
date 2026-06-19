@@ -46,3 +46,11 @@ H.W. (1st)
 -what are dependencies
 -what is the use of "-g" before npm install
 -diff between (^) and (~)
+
+H.W. (2nd)
+-inilize git
+-.gitignore
+-ignore node_module
+-play with route extension
+-order of the routes matter
+-Install postman and make a test API

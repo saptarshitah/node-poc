@@ -7,7 +7,11 @@ app.use("/hello", (req, res) => {
 });
 
 app.use("/test", (req, res) => {
-    res.send("Hello from the server!");
+    res.send("test from the server!");
+});
+
+app.use("/", (req, res) => {
+    res.send("Hello Saptarshi!");
 });
 
 app.listen(3000, () => {
