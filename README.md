@@ -54,3 +54,22 @@ H.W. (2nd)
 -play with route extension
 -order of the routes matter
 -Install postman and make a test API
+-Write logic to handle get, post , patch, put, delete API call and test them on postman.
+-Explore different kind of routeing, use of pattern and rejex : /a/ , /.fly$/
+-query params ,dynamic routes
+
+/ab?c   -make b optional
+/ab+c   -match the pattern , that a and c will be the last and we can add unlimited number of b
+/ab*c   -match the pattern , that a and c will be the last and we can add anything over it
+/a(bc)?d -bc is optional
+/.*fly$/ -end with fly and start anything.
+
+
+app.get("/user/:userId", (req, res) => {
+    console.log(req.params);
+    console.log(req.query);
+    res.send({username : "Sap", password: 'test'});
+});
+
+
+======Middleware & Error Handler======
