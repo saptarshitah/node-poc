@@ -17,7 +17,10 @@ app.delete("/user", (req, res) => {
 });
 
 app.use("/test", (req, res) => {
-    res.send("test from the server!");
+    res.send("test from the server! 1st response");
+},
+(req, res) => {
+    res.send("2nd response! ");
 });
 
 
