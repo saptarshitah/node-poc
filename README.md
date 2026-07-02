@@ -73,3 +73,5 @@ app.get("/user/:userId", (req, res) => {
 
 
 ======Middleware & Error Handler======
+--We are using *app.use* to send any kind of response.
+--If we send *app.get*, *app.post*, *app.put*, *app.delete* request then only we define perticular request.
