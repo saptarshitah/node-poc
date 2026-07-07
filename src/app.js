@@ -16,11 +16,14 @@ app.delete("/user", (req, res) => {
     res.send("deleted successfully!");
 });
 
-app.use("/test", (req, res) => {
-    res.send("test from the server! 1st response");
+app.use("/test", (req, res, next) => {
+    // next();
+    // res.send("test from the server! 1st response");
+    console.log("test1");
 },
 (req, res) => {
-    res.send("2nd response! ");
+    //res.send("2nd response! ");
+    console.log("test2");
 });
 
 

@@ -74,4 +74,49 @@ app.get("/user/:userId", (req, res) => {
 
 ======Middleware & Error Handler======
 --We are using *app.use* to send any kind of response.
+
 --If we send *app.get*, *app.post*, *app.put*, *app.delete* request then only we define perticular request.
+
+--We can send the multiple respons by defining multiple callback function like the following.
+
+            app.use("/test", (req, res) => {
+                res.send("test from the server! 1st response");
+            },
+            (req, res) => {
+                res.send("2nd response! ");
+            });
+
+--If we remove 1st response, then request will stuck.
+
+            app.use("/test", (req, res) => {
+                res.send("test from the server! 1st response");
+            },
+            (req, res) => {
+                res.send("2nd response! ");
+            });
+
+--If we use the "next" function then it will go to the next callback response.
+
+            app.use("/test", (req, res, next) => {
+                //res.send("test from the server! 1st response");
+                next();
+            },
+            (req, res) => {
+                res.send("2nd response! ");
+            });
+
+--If we send 2nd response then it gives error in console, as we can't send more than 1 respons to client at a single request.
+
+--If we send the following request to client then till we get the error as *"Cannot set headers after they are sent to the client"* as how javascript execute behind the seance like 1st when *next* function is invoking that time 2nd callback is executed and request is send so the request cycle is completed. Next while execute 1st callback user send response then error generate as after completing request-response cycle again response is send.
+
+            app.use("/test", (req, res, next) => {
+                next();
+                res.send("test from the server! 1st response");
+            },
+            (req, res) => {
+                res.send("2nd response! ");
+            });
+
+--In a single request we can define multiple route handler, but if we don't invoke *next* function inside a route handler then next route handler is not execute.
+
+//27:13
