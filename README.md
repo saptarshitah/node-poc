@@ -119,4 +119,63 @@ app.get("/user/:userId", (req, res) => {
 
 --In a single request we can define multiple route handler, but if we don't invoke *next* function inside a route handler then next route handler is not execute.
 
-//27:13
+--If we execute the follwing request then it will give error as this will not find next route handler.
+
+        app.use("/test", (req, res, next) => {
+            next();
+            console.log("test1");
+        },
+        (req, res, next) => {
+            next();
+            console.log("test2");
+        });
+
+--At the end we need to send the request otherwise the request will hanging (searching for response).
+
+--We can add as much as route handler in the request, also we can wrap inside [] of route handler or any specific or group of route handler. Basically wraping route handler within [] brackets dosen't change or break.
+
+    app.use("/route", [rH1, rH2, rH3]);
+
+    app.use("/route", [rH1], rH2, rH3);
+
+    app.use("/route", [rH1, rH2], rH3);
+
+**H.W.(3rd)**
+*-Multiple route handler*
+*-next function*
+*-next function and errors along with res.send()*
+*-app.use("/route", [rH1, rH2], rH3);*
+
+
+--We can also define the route in the following way,
+
+    app.get("/test1", (req, res, next) => {
+        console.log("1st route handler");
+        next();
+    });
+
+    app.get("/test1", (req, res, next) => {
+        console.log("2nd route handler");
+        res.send("send from res of test1");
+    });
+
+--If we change the above order then the 2nd route handler will not call, as it already send the response to client.
+
+    app.get("/test1", (req, res, next) => {
+        console.log("2nd route handler");
+        res.send("send from res of test1");
+    });
+
+    app.get("/test1", (req, res, next) => {
+        console.log("1st route handler");
+        next();
+    });
+
+
+--Route handler are the function which we put in the middle, the functions are middleware.
+
+**H.W.(3rd)**
+*-What is middleware?*
+*-How express.js handles route behind the seance?*
+
+53:22
