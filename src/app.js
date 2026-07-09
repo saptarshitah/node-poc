@@ -16,13 +16,27 @@ app.delete("/user", (req, res) => {
     res.send("deleted successfully!");
 });
 
-app.use("/test", (req, res) => {
-    res.send("test from the server! 1st response");
+app.use("/test", (req, res, next) => {
+    next();
+    // res.send("test from the server! 1st response");
+    console.log("test1");
 },
-(req, res) => {
+(req, res, next) => {
+    //next();
     res.send("2nd response! ");
+    console.log("test2");
 });
 
+
+app.get("/test1", (req, res, next) => {
+    console.log("1st route handler");
+    next();
+});
+
+app.get("/test1", (req, res, next) => {
+    console.log("2nd route handler");
+    res.send("send from res of test1");
+});
 
 
 app.listen(3000, () => {
